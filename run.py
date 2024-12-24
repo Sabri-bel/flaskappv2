@@ -2,6 +2,7 @@ import os #from the standard python library
 # pip3 install Flask for install the framework in gitpod
 # import the Flask class (capital F means class name)
 from flask import Flask, render_template
+import json 
 
 # the convention requires that the instance will be stored in a variable called app
 # the first argument is the name of the application module/ package
@@ -20,7 +21,12 @@ def index():
 #link the about page to Flask/ also called routing 
 @app.route("/about") #/about is the path
 def about():
-    return render_template("about.html", page_title="About")
+    data = []
+    #this will open the file company.json as read only "r" and assign the data to the 
+    #variable named json_data
+    with open("data/company.json", "r") as json_data:
+        data = json.load(json_data)
+    return render_template("about.html", page_title="About", company=data)
 
 
 @app.route("/contact")
