@@ -20,17 +20,17 @@ def index():
 #link the about page to Flask/ also called routing 
 @app.route("/about") #/about is the path
 def about():
-    return render_template("about.html")
+    return render_template("about.html", page_title="About")
 
 
 @app.route("/contact")
 def contact():
-    return render_template("contact.html")
+    return render_template("contact.html", page_title="Contact" )
 
 
 @app.route("/career")
 def career():
-    return render_template("career.html")
+    return render_template("career.html", page_title="Careers")
 
 
 if __name__ == "__main__":
