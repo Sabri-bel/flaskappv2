@@ -28,9 +28,10 @@ def about():
         data = json.load(json_data)
     return render_template("about.html", page_title="About", company=data)
 
-
+#create a new route for each member. this app route will push the data from the member name (json file)
 @app.route("/about/<member_name>")
 def about_member(member_name):
+    #create an empty object for storing data
     member = {}
     with open("data/company.json", "r") as json_data:
         data = json.load(json_data)
