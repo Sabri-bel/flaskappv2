@@ -12,7 +12,7 @@ if os.path.exists("env.py"):
 
 # the convention requires that the instance will be stored in a variable called app
 # the first argument is the name of the application module/ package
-# since this is a singe module, it can be used __name__ --> built in variable
+# since this is a single module, it can be used __name__ --> built in variable
 # this is required because flask need to know where to look for templates and static files
 
 app = Flask(__name__)
