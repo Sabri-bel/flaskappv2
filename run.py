@@ -2,8 +2,13 @@ import os #from the standard python library
 # pip3 install Flask for install the framework in gitpod
 # import the Flask class (capital F means class name)
 # import request is for select the method
-from flask import Flask, render_template, request
+# import flash is for generate a feedback for the user -require a secret key
+from flask import Flask, render_template, request, flash
 import json 
+
+#import the env library only if the env.py is found
+if os.path.exists("env.py"):
+    import env
 
 # the convention requires that the instance will be stored in a variable called app
 # the first argument is the name of the application module/ package
@@ -11,6 +16,7 @@ import json
 # this is required because flask need to know where to look for templates and static files
 
 app = Flask(__name__)
+app.secret_key = os.environ.get("SECRET_KEY")
 
 #using the app route decorator (@ -> called decorator / way of wrapping functions)
 # browse to the root directory and trigger the index function
@@ -48,8 +54,11 @@ def about_member(member_name):
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     if request.method == "POST":
-        print(request.form.get("name"))
-        print(request.form["email"])
+        #how to see the information entered in the debug view
+        #print(request.form.get("name"))
+        #print(request.form["email"])
+        flash("thanks {}, we have received your message!".format(
+            request.form.get("name")))
     return render_template("contact.html", page_title="Contact" )
 
 
