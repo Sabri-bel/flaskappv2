@@ -1,7 +1,8 @@
 import os #from the standard python library
 # pip3 install Flask for install the framework in gitpod
 # import the Flask class (capital F means class name)
-from flask import Flask, render_template
+# import request is for select the method
+from flask import Flask, render_template, request
 import json 
 
 # the convention requires that the instance will be stored in a variable called app
@@ -42,9 +43,13 @@ def about_member(member_name):
 
 
 
-
-@app.route("/contact")
+#we need to explict add the post method to the contact form
+#by default, only get method is used with flask if not specified otherwise (error 405)
+@app.route("/contact", methods=["GET", "POST"])
 def contact():
+    if request.method == "POST":
+        print(request.form.get("name"))
+        print(request.form["email"])
     return render_template("contact.html", page_title="Contact" )
 
 
